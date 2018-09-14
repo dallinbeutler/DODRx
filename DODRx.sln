@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOD", "DOD\DOD.csproj", "{6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components", "Components\Components.csproj", "{4F2D812F-99CC-4DAC-9166-94B7465FEA4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DODRx", "DODRx\DODRx.csproj", "{5A298AFE-8A05-4DD2-BA5B-A686FF2EDDD1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4F2D812F-99CC-4DAC-9166-94B7465FEA4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F2D812F-99CC-4DAC-9166-94B7465FEA4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F2D812F-99CC-4DAC-9166-94B7465FEA4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A298AFE-8A05-4DD2-BA5B-A686FF2EDDD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A298AFE-8A05-4DD2-BA5B-A686FF2EDDD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A298AFE-8A05-4DD2-BA5B-A686FF2EDDD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A298AFE-8A05-4DD2-BA5B-A686FF2EDDD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

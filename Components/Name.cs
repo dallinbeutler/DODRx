@@ -1,15 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DOD;
 
 namespace Components
 {
    [System.Composition.Export(typeof(DOD.IDataStream<long>))]
-   public class NameComponentSystem : DOD.DataStream<long,string>
+   [System.Composition.ExportMetadata("Name", nameof(NameComponentSystem))]
+   public class NameComponentSystem : BaseCompSys<string>
    {
-      public NameComponentSystem(): base(defaultValue: "<UNNAMED>")
+      [System.Composition.ImportingConstructor]
+      public NameComponentSystem(DSManager manager) : base(manager)
       {
-         Console.WriteLine("name Comp!");
+         Console.WriteLine("Name!");
+      }
+
+      public override string Name => "Name Comp";
+
+      public override string DefaultVal => "<EMPTY>";
+
+      public override void Initialize()
+      {
          
       }
    }

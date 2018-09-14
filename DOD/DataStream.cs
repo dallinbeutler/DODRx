@@ -8,11 +8,6 @@ using System.Reactive.Linq;
 
 namespace DOD
 {
-
-
-   //public interface INotifyCollectionChanged<T> { event NotifyDataStreamChangedEventHandler<T> DataStreamChanged; }
-
-   //public delegate void NotifyEntityAddedRemovedEventHandler(IDataStream sender, EntityChangedArgs args);
    public delegate void NotifyDataStreamChangedEventHandler<Key>(IDataStream<Key> sender, EntityChangedArgs<Key> args);
    public delegate void NotifyDataStreamChangedEventHandler<Key, T>(IDataStream<Key> sender, DSChangedArgs<Key, T> args);
    public class DSChangedArgs<Key, T> : EntityChangedArgs<Key>
@@ -36,20 +31,6 @@ namespace DOD
       }
    }
 
-   public interface IDataStream<Key>
-   {
-      string Name { get; }
-      int Count { get; }
-      bool HasEntity(Key ID);
-      void Clear();
-      bool RemoveAt(Key ID);
-      void Set(Key ID, object o);
-      object Get(Key ID);
-      event NotifyDataStreamChangedEventHandler<Key> DataStreamChanged;
-      IObservable<EntityChangedArgs<Key>> AsObservable { get; }
-
-   }
-
    /// <summary>
    /// This class is basically for storing values in a way that is easier on memory, 
    /// while also generating events on property change that can be observed.
@@ -57,19 +38,16 @@ namespace DOD
    ///  a name for the system. Used in debugging purposes as well as ensuring one instance of systems
    /// <typeparam name="T"> The datatype to be stored (structs are more memory efficient)</typeparam>
    /// <typeparam name="Key">The key for the dictionary lookup. DSManager uses longs</typeparam>
-
-   public class DataStream<Key, T> : IDataStream<Key>, IEnumerable, IEnumerable<KeyValuePair<Key, T>> //INotifyCollectionChanged<T>,
+   public class DataStream<Key, T> : IDataStream<Key>//, IEnumerable<KeyValuePair<Key, T>>//, IDisposable //INotifyCollectionChanged<T>,
    {
+      public string Name { get; }
       private ConcurrentDictionary<Key, T> DataSet;
       public event NotifyDataStreamChangedEventHandler<Key, T> EntityChanged;
       public event NotifyDataStreamChangedEventHandler<Key> DataStreamChanged;
 
-      //public event NotifyEntityAddedRemovedEventHandler EntityChanged;
-      //public event NotifyEntityAddedRemovedEventHandler DataStreamChanged;
-
       public IObservable<EntityChangedArgs<Key>> AsObservable { get; }
       public IObservable<DSChangedArgs<Key, T>> AsObservableDetails { get; }
-      public string Name { get; }
+      //public string Name { get; }
       public T DefaultVal { get; }
 
       /// <summary>
@@ -95,7 +73,6 @@ namespace DOD
             DataSet = new ConcurrentDictionary<Key, T>(comps);
          else
             DataSet = new ConcurrentDictionary<Key, T>();
-         //DataStreamChanged = new NotifyDataStreamChangedEventHandler<T>((x, y) => { return; });
          AsObservable = Observable
          .FromEventPattern<EntityChangedArgs<Key>>(this, "DataStreamChanged")
          .Select(change => change.EventArgs);
@@ -134,6 +111,7 @@ namespace DOD
          }
       }
 
+
       public bool HasEntity(Key ID)
       {
          return DataSet.Keys.Contains(ID);
@@ -142,8 +120,8 @@ namespace DOD
       {
          get
          {
-            
-            return DataSet[i];//DataSet.GetOrAdd(i,default(T));
+            //add safe way?
+            return DataSet[i];
          }
          set
          {
@@ -172,6 +150,17 @@ namespace DOD
       public T GetOrDefault(Key ID)
       {
          if (DataSet.TryGetValue(ID,out T outval))
+         {
+            return outval;
+         }
+         else
+         {
+            return DefaultVal;
+         }
+      }
+      public object GetObjOrDefault(Key ID)
+      {
+         if (DataSet.TryGetValue(ID, out T outval))
          {
             return outval;
          }
@@ -213,10 +202,10 @@ namespace DOD
          return DataSet.GetEnumerator();
       }
 
-      IEnumerator IEnumerable.GetEnumerator()
-      {
-         return DataSet.GetEnumerator();
-      }
+      //IEnumerator IEnumerable.GetEnumerator()
+      //{
+      //   return DataSet.GetEnumerator();
+      //}
 
       public void Set(Key ID, object o)
       {
@@ -233,5 +222,9 @@ namespace DOD
          return this[ID];
       }
 
+      //public virtual void Dispose()
+      //{
+      //   DataSet.Clear();
+      //}
    }
 }
