@@ -2,7 +2,7 @@
 
 namespace DODRx
 {
-   public interface IDataStream
+   public interface IDataStream<Key>
    {
       string Name { get; }
       int Count { get; }
@@ -14,5 +14,10 @@ namespace DODRx
       object GetObjOrDefault(Key ID);
       event NotifyDataStreamChangedEventHandler<Key> DataStreamChanged;
       IObservable<EntityChangedArgs<Key>> AsObservable { get; }
+   }
+
+   public class MyLazy<T> : Lazy<T>
+   {
+      
    }
 }
