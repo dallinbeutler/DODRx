@@ -40,13 +40,15 @@ namespace DOD
    /// <typeparam name="Key">The key for the dictionary lookup. DSManager uses longs</typeparam>
    public class DataStream<Key, T> : IDataStream<Key>//, IEnumerable<KeyValuePair<Key, T>>//, IDisposable //INotifyCollectionChanged<T>,
    {
+      
+      public Func<T> DefaultDataCtor = null;
       public string Name { get; }
-      private ConcurrentDictionary<Key, T> DataSet;
+      protected ConcurrentDictionary<Key, T> DataSet;
       public event NotifyDataStreamChangedEventHandler<Key, T> EntityChanged;
       public event NotifyDataStreamChangedEventHandler<Key> DataStreamChanged;
 
-      public IObservable<EntityChangedArgs<Key>> AsObservable { get; }
-      public IObservable<DSChangedArgs<Key, T>> AsObservableDetails { get; }
+      public IObservable<EntityChangedArgs<Key>> AsObservable { get; protected set; }
+      public IObservable<DSChangedArgs<Key, T>> AsObservableDetails { get; protected set; }
       //public string Name { get; }
       public T DefaultVal { get; }
 
@@ -84,11 +86,11 @@ namespace DOD
 
 
 
-      private void DataStream_DataStreamChanged(IDataStream<Key> sender, EntityChangedArgs<Key> args)
+      protected void DataStream_DataStreamChanged(IDataStream<Key> sender, EntityChangedArgs<Key> args)
       {
       }
 
-      private Type ChangeArgs
+      protected Type ChangeArgs
       {
          get
          {
@@ -96,7 +98,7 @@ namespace DOD
          }
       }
 
-      private void DataStream_EntityChanged(IDataStream<Key> sender, DSChangedArgs<Key, T> args)
+      protected void DataStream_EntityChanged(IDataStream<Key> sender, DSChangedArgs<Key, T> args)
       {
          DataStreamChanged.Invoke(this, args);
       }
@@ -111,6 +113,7 @@ namespace DOD
          }
       }
 
+      public bool IsInitialized { get; set; } = true;
 
       public bool HasEntity(Key ID)
       {
@@ -220,6 +223,19 @@ namespace DOD
       public object Get(Key ID)
       {
          return this[ID];
+      }
+
+      public object GetOrAddObj(Key ID)
+      {
+         var outvar = DefaultDataCtor != null ? DefaultDataCtor.Invoke() : default(T);
+         this[ID] = outvar;
+         return outvar;
+      }
+      public T GetOrAdd(Key ID)
+      {
+         var outvar = DefaultDataCtor != null ? DefaultDataCtor.Invoke() : default(T);
+         this[ID] = outvar;
+         return outvar;
       }
 
       //public virtual void Dispose()

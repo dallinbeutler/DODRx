@@ -11,7 +11,7 @@ namespace Components
 
    public abstract class BaseCompSys<T> : DOD.DataStream<long, T> //, IDisposable
    {
-      protected DOD.DSManagerLazy manager { get; }
+      protected DOD.DSManager manager { get; }
 
       public abstract void Initialize();
       
@@ -19,7 +19,7 @@ namespace Components
 
       public abstract new T DefaultVal { get; }
 
-      public BaseCompSys(DOD.DSManagerLazy manager) : base()
+      public BaseCompSys(DOD.DSManager manager) : base()
       {
          this.manager = manager;
          this.DataStreamChanged += manager.ComponentChange;

@@ -1,0 +1,12 @@
+C:\Users\User\Documents\Repos\DODRx\Components\obj\Debug\netstandard2.0\Components.csprojAssemblyReference.cache
+C:\Users\User\Documents\Repos\DODRx\Components\obj\Debug\netstandard2.0\Components.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\Repos\DODRx\Components\obj\Debug\netstandard2.0\Components.AssemblyInfoInputs.cache
+C:\Users\User\Documents\Repos\DODRx\Components\obj\Debug\netstandard2.0\Components.AssemblyInfo.cs
+C:\Users\User\Documents\Repos\DODRx\Components\bin\Debug\netstandard2.0\Components.deps.json
+C:\Users\User\Documents\Repos\DODRx\Components\bin\Debug\netstandard2.0\Components.dll
+C:\Users\User\Documents\Repos\DODRx\Components\bin\Debug\netstandard2.0\Components.pdb
+C:\Users\User\Documents\Repos\DODRx\Components\bin\Debug\netstandard2.0\DOD.dll
+C:\Users\User\Documents\Repos\DODRx\Components\bin\Debug\netstandard2.0\DOD.pdb
+C:\Users\User\Documents\Repos\DODRx\Components\obj\Debug\netstandard2.0\Components.csproj.CopyComplete
+C:\Users\User\Documents\Repos\DODRx\Components\obj\Debug\netstandard2.0\Components.dll
+C:\Users\User\Documents\Repos\DODRx\Components\obj\Debug\netstandard2.0\Components.pdb

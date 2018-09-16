@@ -1,0 +1,16 @@
+C:\Users\User\Documents\Repos\DODRx\Testing\obj\Debug\netcoreapp2.1\Testing.csprojAssemblyReference.cache
+C:\Users\User\Documents\Repos\DODRx\Testing\obj\Debug\netcoreapp2.1\Testing.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\Repos\DODRx\Testing\obj\Debug\netcoreapp2.1\Testing.AssemblyInfoInputs.cache
+C:\Users\User\Documents\Repos\DODRx\Testing\obj\Debug\netcoreapp2.1\Testing.AssemblyInfo.cs
+C:\Users\User\Documents\Repos\DODRx\Testing\bin\Debug\netcoreapp2.1\Testing.deps.json
+C:\Users\User\Documents\Repos\DODRx\Testing\bin\Debug\netcoreapp2.1\Testing.runtimeconfig.json
+C:\Users\User\Documents\Repos\DODRx\Testing\bin\Debug\netcoreapp2.1\Testing.runtimeconfig.dev.json
+C:\Users\User\Documents\Repos\DODRx\Testing\bin\Debug\netcoreapp2.1\Testing.dll
+C:\Users\User\Documents\Repos\DODRx\Testing\bin\Debug\netcoreapp2.1\Testing.pdb
+C:\Users\User\Documents\Repos\DODRx\Testing\bin\Debug\netcoreapp2.1\Components.dll
+C:\Users\User\Documents\Repos\DODRx\Testing\bin\Debug\netcoreapp2.1\DOD.dll
+C:\Users\User\Documents\Repos\DODRx\Testing\bin\Debug\netcoreapp2.1\Components.pdb
+C:\Users\User\Documents\Repos\DODRx\Testing\bin\Debug\netcoreapp2.1\DOD.pdb
+C:\Users\User\Documents\Repos\DODRx\Testing\obj\Debug\netcoreapp2.1\Testing.csproj.CopyComplete
+C:\Users\User\Documents\Repos\DODRx\Testing\obj\Debug\netcoreapp2.1\Testing.dll
+C:\Users\User\Documents\Repos\DODRx\Testing\obj\Debug\netcoreapp2.1\Testing.pdb
