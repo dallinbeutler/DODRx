@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Composition;
 using System.Composition.Hosting;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reactive;
@@ -73,6 +74,28 @@ namespace Testing
          //System.Threading.Thread.Sleep(500);
          //hc[dougy] -= 20;
          nc[dave] = "DAVVVE";
+         System.Threading.Thread.Sleep(5000);
+         var TimeManager = manager.GetCompSys<SysDilation>();
+         long Rick = manager.AddEntity(new CompPair(hc, 100),new CompPair(nc,"RICK"));
+         var hurtRick = new TimedEvent(Rick, new TimeSpan(0, 0, 1));
+         hurtRick.OnCompleted.Subscribe(x =>
+         {
+            nc[Rick] = "Formerly Known as Rick";
+         });
+         TimeManager.timedEvents.Add(hurtRick);
+         Stopwatch stopwatch = new Stopwatch();
+         stopwatch.Start();
+         while (true)
+         {
+
+            TimeSpan delta = stopwatch.Elapsed ;
+            if (delta > new TimeSpan(0, 0, 0, 0, 1 / 60000))
+            {
+               TimeManager.Update(delta);
+               stopwatch.Restart();
+
+            }
+         }
       }
 
       public static CompositionHost GetConfiguration()
