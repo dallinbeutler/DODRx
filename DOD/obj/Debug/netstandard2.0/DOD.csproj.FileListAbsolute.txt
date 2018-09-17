@@ -7,3 +7,11 @@ C:\Users\User\Documents\Repos\DODRx\DOD\obj\Debug\netstandard2.0\DOD.AssemblyInf
 C:\Users\User\Documents\Repos\DODRx\DOD\obj\Debug\netstandard2.0\DOD.AssemblyInfo.cs
 C:\Users\User\Documents\Repos\DODRx\DOD\obj\Debug\netstandard2.0\DOD.dll
 C:\Users\User\Documents\Repos\DODRx\DOD\obj\Debug\netstandard2.0\DOD.pdb
+G:\code\DODRx\DOD\bin\Debug\netstandard2.0\DOD.deps.json
+G:\code\DODRx\DOD\bin\Debug\netstandard2.0\DOD.dll
+G:\code\DODRx\DOD\bin\Debug\netstandard2.0\DOD.pdb
+G:\code\DODRx\DOD\obj\Debug\netstandard2.0\DOD.csproj.CoreCompileInputs.cache
+G:\code\DODRx\DOD\obj\Debug\netstandard2.0\DOD.AssemblyInfoInputs.cache
+G:\code\DODRx\DOD\obj\Debug\netstandard2.0\DOD.AssemblyInfo.cs
+G:\code\DODRx\DOD\obj\Debug\netstandard2.0\DOD.dll
+G:\code\DODRx\DOD\obj\Debug\netstandard2.0\DOD.pdb

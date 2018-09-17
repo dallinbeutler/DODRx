@@ -50,7 +50,7 @@ namespace DOD
       public IObservable<EntityChangedArgs<Key>> AsObservable { get; protected set; }
       public IObservable<DSChangedArgs<Key, T>> AsObservableDetails { get; protected set; }
       //public string Name { get; }
-      public T DefaultVal { get; }
+      public T DefaultVal { get; protected set; }
 
       /// <summary>
       /// Standard Datastream Constructor

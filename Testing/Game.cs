@@ -13,6 +13,7 @@ using System.Reactive.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Testing
@@ -62,39 +63,36 @@ namespace Testing
          long dougy = manager.AddEntity(new CompPair(hc, 100), new CompPair(nc, "DOUG"));
          long dave = manager.AddEntity(new CompPair(hc, 100));
          hc.Bleed(dougy,15,4);
-         //hc[dougy] -= 10;
-         //System.Threading.Thread.Sleep(500);
-         //hc[dougy] -= 20;
-         //System.Threading.Thread.Sleep(500);
-         //hc[dougy] -= 20;
-         //System.Threading.Thread.Sleep(500);
-         //hc[dougy] -= 20;
-         //System.Threading.Thread.Sleep(500);
-         //hc[dougy] -= 20;
-         //System.Threading.Thread.Sleep(500);
-         //hc[dougy] -= 20;
          nc[dave] = "DAVVVE";
          System.Threading.Thread.Sleep(5000);
-         var TimeManager = manager.GetCompSys<SysDilation>();
+         var TimeManager = manager.GetCompSys<SysTime>();
          long Rick = manager.AddEntity(new CompPair(hc, 100),new CompPair(nc,"RICK"));
-         var hurtRick = new TimedEvent(Rick, new TimeSpan(0, 0, 1));
-         hurtRick.OnCompleted.Subscribe(x =>
+         TimeManager.Room.Dilation = 1.0;
+         var hurtRick = TimeManager.DilatedTimer(-2, new TimeSpan(0, 0, 3)).Subscribe(x =>
          {
-            nc[Rick] = "Formerly Known as Rick";
+            hc[Rick] -= 12;
          });
-         TimeManager.timedEvents.Add(hurtRick);
+         Thread.Sleep(100);
+         TimeManager.Room.Dilation = .000001;
+         //var hurtRick = new TimedEvent(Rick, new TimeSpan(0, 0, 1));
+         //hurtRick.OnCompleted.Subscribe(x =>
+         //{
+         //   nc[Rick] = "Formerly Known as Rick";
+         //});
+         //TimeManager.timedEvents.Add(hurtRick);
          Stopwatch stopwatch = new Stopwatch();
          stopwatch.Start();
          while (true)
          {
+            Thread.Sleep(1000);
+            Console.WriteLine(".");
+            //TimeSpan delta = stopwatch.Elapsed ;
+            //if (delta > new TimeSpan(0, 0, 0, 0, 1 / 60000))
+            //{
+            //   TimeManager.Update(delta);
+            //   stopwatch.Restart();
 
-            TimeSpan delta = stopwatch.Elapsed ;
-            if (delta > new TimeSpan(0, 0, 0, 0, 1 / 60000))
-            {
-               TimeManager.Update(delta);
-               stopwatch.Restart();
-
-            }
+            //}
          }
       }
 
