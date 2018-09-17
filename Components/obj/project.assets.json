@@ -41,24 +41,6 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
-      "ReactiveProperty/5.2.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Collections": "4.3.0",
-          "System.ComponentModel.Annotations": "4.5.0",
-          "System.ObjectModel": "4.3.0",
-          "System.Reactive": "4.0.0",
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Extensions": "4.3.0",
-          "System.Runtime": "4.3.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/ReactiveProperty.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/ReactiveProperty.dll": {}
-        }
-      },
       "System.Collections/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -68,15 +50,6 @@
         },
         "compile": {
           "ref/netstandard1.3/System.Collections.dll": {}
-        }
-      },
-      "System.ComponentModel.Annotations/4.5.0": {
-        "type": "package",
-        "compile": {
-          "ref/netstandard2.0/System.ComponentModel.Annotations.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/System.ComponentModel.Annotations.dll": {}
         }
       },
       "System.Composition/1.0.31": {
@@ -715,65 +688,6 @@
         "netstandard.library.nuspec"
       ]
     },
-    "ReactiveProperty/5.2.0": {
-      "sha512": "9yC6bOQPI8psqYfdhSACIn63b550UxVtu6pU2RElQPyW5bhNG+8ouSzoAlbjx7kRC9nzsMNTBq35xm845UQCDA==",
-      "type": "package",
-      "path": "reactiveproperty/5.2.0",
-      "files": [
-        "LICENSE.txt",
-        "Snippet/csharp5/AsyncReactiveCommand.snippet",
-        "Snippet/csharp5/AsyncReactiveCommandGeneric.snippet",
-        "Snippet/csharp5/ReactiveCollection.snippet",
-        "Snippet/csharp5/ReactiveCommand.snippet",
-        "Snippet/csharp5/ReactiveCommandGeneric.snippet",
-        "Snippet/csharp5/ReactiveProperty.snippet",
-        "Snippet/csharp5/ReadOnlyReactiveCollection.snippet",
-        "Snippet/csharp5/ReadOnlyReactiveProperty.snippet",
-        "Snippet/csharp6/AsyncReactiveCommand.snippet",
-        "Snippet/csharp6/AsyncReactiveCommandGeneric.snippet",
-        "Snippet/csharp6/ReactiveCollection.snippet",
-        "Snippet/csharp6/ReactiveCommand.snippet",
-        "Snippet/csharp6/ReactiveCommandGeneric.snippet",
-        "Snippet/csharp6/ReactiveProperty.snippet",
-        "Snippet/csharp6/ReadOnlyReactiveCollection.snippet",
-        "Snippet/csharp6/ReadOnlyReactiveProperty.snippet",
-        "lib/MonoAndroid/ReactiveProperty.Android.XML",
-        "lib/MonoAndroid/ReactiveProperty.Android.dll",
-        "lib/MonoAndroid/ReactiveProperty.Android.pdb",
-        "lib/MonoAndroid/ReactiveProperty.dll",
-        "lib/MonoAndroid/ReactiveProperty.pdb",
-        "lib/MonoAndroid/ReactiveProperty.xml",
-        "lib/MonoTouch/ReactiveProperty.dll",
-        "lib/MonoTouch/ReactiveProperty.iOS.XML",
-        "lib/MonoTouch/ReactiveProperty.iOS.dll",
-        "lib/MonoTouch/ReactiveProperty.iOS.pdb",
-        "lib/MonoTouch/ReactiveProperty.pdb",
-        "lib/MonoTouch/ReactiveProperty.xml",
-        "lib/Xamarin.iOS10/ReactiveProperty.dll",
-        "lib/Xamarin.iOS10/ReactiveProperty.iOS.XML",
-        "lib/Xamarin.iOS10/ReactiveProperty.iOS.dll",
-        "lib/Xamarin.iOS10/ReactiveProperty.iOS.pdb",
-        "lib/Xamarin.iOS10/ReactiveProperty.pdb",
-        "lib/Xamarin.iOS10/ReactiveProperty.xml",
-        "lib/net461/ReactiveProperty.NET46.XML",
-        "lib/net461/ReactiveProperty.NET46.dll",
-        "lib/net461/ReactiveProperty.NET46.pdb",
-        "lib/net461/ReactiveProperty.dll",
-        "lib/net461/ReactiveProperty.pdb",
-        "lib/net461/ReactiveProperty.xml",
-        "lib/netstandard2.0/ReactiveProperty.dll",
-        "lib/netstandard2.0/ReactiveProperty.pdb",
-        "lib/netstandard2.0/ReactiveProperty.xml",
-        "lib/uap10.0/ReactiveProperty.UWP.XML",
-        "lib/uap10.0/ReactiveProperty.UWP.dll",
-        "lib/uap10.0/ReactiveProperty.UWP.pdb",
-        "lib/uap10.0/ReactiveProperty.dll",
-        "lib/uap10.0/ReactiveProperty.pdb",
-        "lib/uap10.0/ReactiveProperty.xml",
-        "reactiveproperty.5.2.0.nupkg.sha512",
-        "reactiveproperty.nuspec"
-      ]
-    },
     "System.Collections/4.3.0": {
       "sha512": "3Dcj85/TBdVpL5Zr+gEEBUuFe2icOnLalmEh9hfck1PTYbbyWuZgh4fmm2ysCLTrqLQw6t3TgTyJ+VLp+Qb+Lw==",
       "type": "package",
@@ -838,94 +752,6 @@
         "ref/xamarinwatchos10/_._",
         "system.collections.4.3.0.nupkg.sha512",
         "system.collections.nuspec"
-      ]
-    },
-    "System.ComponentModel.Annotations/4.5.0": {
-      "sha512": "IjDa643EO77A4CL9dhxfZ6zzGu+pM8Ar0NYPRMN3TvDiga4uGDzFHOj/ArpyNxxKyO5IFT2LZ0rK3kUog7g3jA==",
-      "type": "package",
-      "path": "system.componentmodel.annotations/4.5.0",
-      "files": [
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
-        "lib/net45/_._",
-        "lib/net461/System.ComponentModel.Annotations.dll",
-        "lib/netcore50/System.ComponentModel.Annotations.dll",
-        "lib/netcoreapp2.0/_._",
-        "lib/netstandard1.4/System.ComponentModel.Annotations.dll",
-        "lib/netstandard2.0/System.ComponentModel.Annotations.dll",
-        "lib/portable-net45+win8/_._",
-        "lib/uap10.0.16299/_._",
-        "lib/win8/_._",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "lib/xamarintvos10/_._",
-        "lib/xamarinwatchos10/_._",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
-        "ref/net45/_._",
-        "ref/net461/System.ComponentModel.Annotations.dll",
-        "ref/net461/System.ComponentModel.Annotations.xml",
-        "ref/netcore50/System.ComponentModel.Annotations.dll",
-        "ref/netcore50/System.ComponentModel.Annotations.xml",
-        "ref/netcore50/de/System.ComponentModel.Annotations.xml",
-        "ref/netcore50/es/System.ComponentModel.Annotations.xml",
-        "ref/netcore50/fr/System.ComponentModel.Annotations.xml",
-        "ref/netcore50/it/System.ComponentModel.Annotations.xml",
-        "ref/netcore50/ja/System.ComponentModel.Annotations.xml",
-        "ref/netcore50/ko/System.ComponentModel.Annotations.xml",
-        "ref/netcore50/ru/System.ComponentModel.Annotations.xml",
-        "ref/netcore50/zh-hans/System.ComponentModel.Annotations.xml",
-        "ref/netcore50/zh-hant/System.ComponentModel.Annotations.xml",
-        "ref/netcoreapp2.0/_._",
-        "ref/netstandard1.1/System.ComponentModel.Annotations.dll",
-        "ref/netstandard1.1/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.1/de/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.1/es/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.1/fr/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.1/it/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.1/ja/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.1/ko/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.1/ru/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.1/zh-hans/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.1/zh-hant/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.3/System.ComponentModel.Annotations.dll",
-        "ref/netstandard1.3/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.3/de/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.3/es/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.3/fr/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.3/it/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.3/ja/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.3/ko/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.3/ru/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.3/zh-hans/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.3/zh-hant/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.4/System.ComponentModel.Annotations.dll",
-        "ref/netstandard1.4/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.4/de/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.4/es/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.4/fr/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.4/it/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.4/ja/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.4/ko/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.4/ru/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.4/zh-hans/System.ComponentModel.Annotations.xml",
-        "ref/netstandard1.4/zh-hant/System.ComponentModel.Annotations.xml",
-        "ref/netstandard2.0/System.ComponentModel.Annotations.dll",
-        "ref/netstandard2.0/System.ComponentModel.Annotations.xml",
-        "ref/portable-net45+win8/_._",
-        "ref/uap10.0.16299/_._",
-        "ref/win8/_._",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
-        "system.componentmodel.annotations.4.5.0.nupkg.sha512",
-        "system.componentmodel.annotations.nuspec",
-        "useSharedDesignerContext.txt",
-        "version.txt"
       ]
     },
     "System.Composition/1.0.31": {
@@ -2477,28 +2303,27 @@
       "DOD >= 1.0.0",
       "Microsoft.Composition >= 1.0.31",
       "NETStandard.Library >= 2.0.3",
-      "ReactiveProperty >= 5.2.0",
       "System.Runtime.Loader >= 4.3.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {},
+    "C:\\Users\\BeutlerD\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Documents\\Repos\\DODRx\\Components\\Components.csproj",
+      "projectUniqueName": "G:\\code\\DODRx\\Components\\Components.csproj",
       "projectName": "Components",
-      "projectPath": "C:\\Users\\User\\Documents\\Repos\\DODRx\\Components\\Components.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Documents\\Repos\\DODRx\\Components\\obj\\",
+      "projectPath": "G:\\code\\DODRx\\Components\\Components.csproj",
+      "packagesPath": "C:\\Users\\BeutlerD\\.nuget\\packages\\",
+      "outputPath": "G:\\code\\DODRx\\Components\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\BeutlerD\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2506,13 +2331,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "http://www.myget.org/F/avalonia-ci/api/v2": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\User\\Documents\\Repos\\DODRx\\DOD\\DOD.csproj": {
-              "projectPath": "C:\\Users\\User\\Documents\\Repos\\DODRx\\DOD\\DOD.csproj"
+            "G:\\code\\DODRx\\DOD\\DOD.csproj": {
+              "projectPath": "G:\\code\\DODRx\\DOD\\DOD.csproj"
             }
           }
         }
@@ -2535,10 +2361,6 @@
             "target": "Package",
             "version": "[2.0.3, )",
             "autoReferenced": true
-          },
-          "ReactiveProperty": {
-            "target": "Package",
-            "version": "[5.2.0, )"
           },
           "System.Runtime.Loader": {
             "target": "Package",

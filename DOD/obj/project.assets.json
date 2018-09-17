@@ -519,23 +519,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\User\\.nuget\\packages\\": {},
+    "C:\\Users\\BeutlerD\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\Documents\\Repos\\DODRx\\DOD\\DOD.csproj",
+      "projectUniqueName": "G:\\code\\DODRx\\DOD\\DOD.csproj",
       "projectName": "DOD",
-      "projectPath": "C:\\Users\\User\\Documents\\Repos\\DODRx\\DOD\\DOD.csproj",
-      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\Documents\\Repos\\DODRx\\DOD\\obj\\",
+      "projectPath": "G:\\code\\DODRx\\DOD\\DOD.csproj",
+      "packagesPath": "C:\\Users\\BeutlerD\\.nuget\\packages\\",
+      "outputPath": "G:\\code\\DODRx\\DOD\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\BeutlerD\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -543,6 +543,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "http://www.myget.org/F/avalonia-ci/api/v2": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
