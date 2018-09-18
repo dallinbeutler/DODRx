@@ -60,8 +60,8 @@ namespace Testing
                 });
 
          hc.Initialize();
-         long dougy = manager.AddEntity(new CompPair(hc, 100), new CompPair(nc, "DOUG"));
-         long dave = manager.AddEntity(new CompPair(hc, 100));
+         long dougy = manager.AddEntity(new CompPair(hc, new HealthComp()), new CompPair(nc, "DOUG"));
+         long dave = manager.AddEntity(new CompPair(hc, new HealthComp()));
          hc.Bleed(dougy,15,4);
          nc[dave] = "DAVVVE";
          System.Threading.Thread.Sleep(5000);
@@ -70,7 +70,7 @@ namespace Testing
          TimeManager.Room.Dilation = 1.0;
          var hurtRick = TimeManager.DilatedTimer(-2, new TimeSpan(0, 0, 3)).Subscribe(x =>
          {
-            hc[Rick] -= 12;
+            hc[Rick].currentHealth -= 12;
          });
          TimeManager.Room.Dilation = .5;
          //var hurtRick = new TimedEvent(Rick, new TimeSpan(0, 0, 1));
