@@ -52,13 +52,13 @@ namespace Components
             FinalDilation = Dilation;
             foreach (var ab in AffectedBy)
             {
-               FinalDilation = lerp(FinalDilation, ab.Item2.Dilation, ab.Item1 / 2);
+               FinalDilation *= System.Math.Pow(ab.Item2.Dilation, ab.Item1); 
             }
          }
-         private double lerp(double value1, double value2, double percent)
-         {
-            return (value1 * (1 - percent)) + (value2 * percent);
-         }
+         //private double lerp(double value1, double value2, double percent)
+         //{
+         //   return (value1 * (1 - percent)) + (value2 * percent);
+         //}
       }
 
       public DilOption Global = new DilOption(1.0);

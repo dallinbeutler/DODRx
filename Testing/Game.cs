@@ -72,20 +72,21 @@ namespace Testing
          {
             hc[Rick] -= 12;
          });
-         Thread.Sleep(100);
-         TimeManager.Room.Dilation = .000001;
+         TimeManager.Room.Dilation = .5;
          //var hurtRick = new TimedEvent(Rick, new TimeSpan(0, 0, 1));
          //hurtRick.OnCompleted.Subscribe(x =>
          //{
          //   nc[Rick] = "Formerly Known as Rick";
          //});
          //TimeManager.timedEvents.Add(hurtRick);
+         
          Stopwatch stopwatch = new Stopwatch();
          stopwatch.Start();
          while (true)
          {
             Thread.Sleep(1000);
             Console.WriteLine(".");
+            //nc[Rick] = "Formerly known as Rick";
             //TimeSpan delta = stopwatch.Elapsed ;
             //if (delta > new TimeSpan(0, 0, 0, 0, 1 / 60000))
             //{
