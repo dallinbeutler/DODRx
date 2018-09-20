@@ -15,9 +15,8 @@ namespace DOD
       bool RemoveAt(Key ID);
       void Set(Key ID, object o);
       object Get(Key ID);
-      object GetOrAddObj(Key ID);
-      //object GetOrDefault(Key ID);
-      object GetObjOrDefault(Key ID);
+      object GetOrAdd(Key ID);
+      object GetOrDefault(Key ID);
       event NotifyDataStreamChangedEventHandler<Key> DataStreamChanged;
       IObservable<EntityChangedArgs<Key>> AsObservable { get; }
    }

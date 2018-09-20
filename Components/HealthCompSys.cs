@@ -36,7 +36,7 @@ namespace Components
          this.AsObservableDetails.Where(x => x.NewVal.currentHealth <= 0).Subscribe(x =>
          {
             //Console.WriteLine(x.Entity + "- "+ (namecs.HasEntity(x.Entity)? namecs[x.Entity]:"" )+" is Dead!");
-            Console.WriteLine(x.Entity + "- "+ namecs.GetObjOrDefault(x.Entity)+" is Dead!");
+            Console.WriteLine(x.Entity + "- "+ namecs.GetOrDefault(x.Entity)+" is Dead!");
          });
       }
 

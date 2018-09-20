@@ -12,8 +12,10 @@ namespace DOD
    public delegate void NotifyDataStreamChangedEventHandler<Key, T>(IDataStream<Key> sender, DSChangedArgs<Key, T> args);
    public class DSChangedArgs<Key, T> : EntityChangedArgs<Key>
    {
-      public T OldVal;
-      public T NewVal;
+      public T NewVal { get; set; }
+
+      public T OldVal { get; set; }
+
       public DSChangedArgs(Key entity, NotifyCollectionChangedAction action, T oldVal, T newVal) : base(entity, action)
       {
          OldVal = oldVal;
@@ -22,8 +24,8 @@ namespace DOD
    }
    public class EntityChangedArgs<Key>
    {
-      public Key Entity;
-      public NotifyCollectionChangedAction Action;
+      public Key Entity { get; set; }
+      public NotifyCollectionChangedAction Action { get; set; }
       public EntityChangedArgs(Key entity, NotifyCollectionChangedAction action)
       {
          Entity = entity;
@@ -40,8 +42,7 @@ namespace DOD
    /// <typeparam name="Key">The key for the dictionary lookup. DSManager uses longs</typeparam>
    public class DataStream<Key, T> : IDataStream<Key>//, IEnumerable<KeyValuePair<Key, T>>//, IDisposable //INotifyCollectionChanged<T>,
    {
-      
-      public Func<T> DefaultDataCtor = null;
+
       public string Name { get; }
       protected ConcurrentDictionary<Key, T> DataSet;
       public event NotifyDataStreamChangedEventHandler<Key, T> EntityChanged;
@@ -49,8 +50,10 @@ namespace DOD
 
       public IObservable<EntityChangedArgs<Key>> AsObservable { get; protected set; }
       public IObservable<DSChangedArgs<Key, T>> AsObservableDetails { get; protected set; }
-      //public string Name { get; }
       public T DefaultVal { get; protected set; }
+
+      public bool IsInitialized { get; set; } = true;
+      public Func<T> DefaultDataCtor { get; set; }
 
       /// <summary>
       /// Standard Datastream Constructor
@@ -88,6 +91,7 @@ namespace DOD
 
       protected void DataStream_DataStreamChanged(IDataStream<Key> sender, EntityChangedArgs<Key> args)
       {
+         // Method intentionally left empty. We can implement events if changed
       }
 
       protected Type ChangeArgs
@@ -113,8 +117,6 @@ namespace DOD
          }
       }
 
-      public bool IsInitialized { get; set; } = true;
-
       public bool HasEntity(Key ID)
       {
          return DataSet.Keys.Contains(ID);
@@ -136,7 +138,7 @@ namespace DOD
             else if (!EqualityComparer<T>.Default.Equals(DataSet[i], value))
             {
                DataSet[i] = value;
-               EntityChanged.Invoke(this, new DSChangedArgs<Key, T>(i, NotifyCollectionChangedAction.Replace, default(T), value));//(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, new KeyValuePair<int, T>(i, value)));
+               EntityChanged.Invoke(this, new DSChangedArgs<Key, T>(i, NotifyCollectionChangedAction.Replace, default(T), value));
             }
          }
       }
@@ -150,45 +152,23 @@ namespace DOD
       }
 
 
-      public T GetOrDefault(Key ID)
-      {
-         if (DataSet.TryGetValue(ID,out T outval))
-         {
-            return outval;
-         }
-         else
-         {
-            return DefaultVal;
-         }
-      }
-      public object GetObjOrDefault(Key ID)
-      {
-         if (DataSet.TryGetValue(ID, out T outval))
-         {
-            return outval;
-         }
-         else
-         {
-            return DefaultVal;
-         }
-      }
 
-      public bool RemoveAt(Key i)
+
+
+      public bool RemoveAt(Key ID)
       {
-         T val;
-         if (DataSet.TryRemove(i, out val))
+         if (DataSet.TryRemove(ID, out T val))
          {
-            EntityChanged.Invoke(this, new DSChangedArgs<Key, T>(i, NotifyCollectionChangedAction.Remove, val, default(T)));//this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, new KeyValuePair<int, T>(i, val)));
+            EntityChanged.Invoke(this, new DSChangedArgs<Key, T>(ID, NotifyCollectionChangedAction.Remove, val, default(T)));
             return true;
          }
          return false;
       }
       public T PopAt(Key i)
       {
-         T val;
-         if (DataSet.TryRemove(i, out val))
+         if (DataSet.TryRemove(i, out T val))
          {
-            EntityChanged.Invoke(this, new DSChangedArgs<Key, T>(i, NotifyCollectionChangedAction.Remove, val, default(T)));//this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, new KeyValuePair<int, T>(i, val)));
+            EntityChanged.Invoke(this, new DSChangedArgs<Key, T>(i, NotifyCollectionChangedAction.Remove, val, default(T)));
             return val;
          }
          return default(T);
@@ -196,7 +176,7 @@ namespace DOD
       public void Clear()
       {
          DataSet.Clear();
-         EntityChanged.Invoke(this, new DSChangedArgs<Key, T>(default(Key), NotifyCollectionChangedAction.Reset, default(T), default(T))); //this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+         EntityChanged.Invoke(this, new DSChangedArgs<Key, T>(default(Key), NotifyCollectionChangedAction.Reset, default(T), default(T))); 
       }
 
 
@@ -204,11 +184,6 @@ namespace DOD
       {
          return DataSet.GetEnumerator();
       }
-
-      //IEnumerator IEnumerable.GetEnumerator()
-      //{
-      //   return DataSet.GetEnumerator();
-      //}
 
       public void Set(Key ID, object o)
       {
@@ -220,12 +195,18 @@ namespace DOD
          }
       }
 
-      public object Get(Key ID)
+      object IDataStream<Key>.Get(Key ID)
       {
          return this[ID];
       }
 
-      public object GetOrAddObj(Key ID)
+      public T Get(Key ID)
+      {
+         return this[ID];
+      }
+
+
+      object IDataStream<Key>.GetOrAdd(Key ID)
       {
          var outvar = DefaultDataCtor != null ? DefaultDataCtor.Invoke() : default(T);
          this[ID] = outvar;
@@ -238,9 +219,28 @@ namespace DOD
          return outvar;
       }
 
-      //public virtual void Dispose()
-      //{
-      //   DataSet.Clear();
-      //}
+      object IDataStream<Key>.GetOrDefault(Key ID)
+      {
+         if (DataSet.TryGetValue(ID, out T outval))
+         {
+            return outval;
+         }
+         else
+         {
+            return DefaultVal;
+         }
+      }
+
+      public T GetOrDefault(Key ID)
+      {
+         if (DataSet.TryGetValue(ID, out T outval))
+         {
+            return outval;
+         }
+         else
+         {
+            return DefaultVal;
+         }
+      }
    }
 }
