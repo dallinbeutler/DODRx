@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27924.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.csproj", "{2520B94A-E126-4C50-929F-64FFA75C70F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing", "Testing\Testing.csproj", "{2520B94A-E126-4C50-929F-64FFA75C70F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOD", "DOD\DOD.csproj", "{6E464778-D5E6-402F-AB22-6923F3C7214C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DOD", "DOD\DOD.csproj", "{6E464778-D5E6-402F-AB22-6923F3C7214C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components", "Components\Components.csproj", "{4F2D812F-99CC-4DAC-9166-94B7465FEA4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Components", "Components\Components.csproj", "{4F2D812F-99CC-4DAC-9166-94B7465FEA4E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DODRx", "DODRx\DODRx.csproj", "{5A298AFE-8A05-4DD2-BA5B-A686FF2EDDD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DODRx", "DODRx\DODRx.csproj", "{5A298AFE-8A05-4DD2-BA5B-A686FF2EDDD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodRust", "GodRust\GodRust.csproj", "{C16F5F4C-285C-4590-A130-20A90FB178C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5A298AFE-8A05-4DD2-BA5B-A686FF2EDDD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A298AFE-8A05-4DD2-BA5B-A686FF2EDDD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A298AFE-8A05-4DD2-BA5B-A686FF2EDDD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C16F5F4C-285C-4590-A130-20A90FB178C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C16F5F4C-285C-4590-A130-20A90FB178C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C16F5F4C-285C-4590-A130-20A90FB178C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C16F5F4C-285C-4590-A130-20A90FB178C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
