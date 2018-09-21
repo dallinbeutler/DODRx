@@ -10,21 +10,6 @@ using System.Threading;
 
 namespace DOD
 {
-   //public class MyLazy<T> : Lazy<T>
-   //{
-   //   public Type EnclosedType
-   //   {
-   //      get
-   //      {
-   //         return typeof(T);
-   //      }
-   //   }
-   //   //public MyLazy(string name = nameof(T)) : base(true)
-   //   //{
-   //   //   this.Name = name;
-   //   //}
-   //}
-
    public struct CompPair
    {
       public IDataStream<long> system { get; }

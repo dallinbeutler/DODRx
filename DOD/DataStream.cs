@@ -55,6 +55,11 @@ namespace DOD
       public bool IsInitialized { get; set; } = true;
       public Func<T> DefaultDataCtor { get; set; }
 
+      public IEnumerable<KeyValuePair<Key,T>> AsEnumerable()
+      {
+         return DataSet.AsEnumerable();
+      }
+
       /// <summary>
       /// Standard Datastream Constructor
       /// </summary>
@@ -79,11 +84,11 @@ namespace DOD
          else
             DataSet = new ConcurrentDictionary<Key, T>();
          AsObservable = Observable
-         .FromEventPattern<EntityChangedArgs<Key>>(this, "DataStreamChanged")
+         .FromEventPattern<EntityChangedArgs<Key>>(this, "DSChanged")
          .Select(change => change.EventArgs);
 
          AsObservableDetails = Observable
-         .FromEventPattern<DSChangedArgs<Key, T>>(this, "EntityChanged")
+         .FromEventPattern<DSChangedArgs<Key, T>>(this, "DSChangedDetails")
          .Select(change => change.EventArgs);
       }
 
@@ -212,13 +217,18 @@ namespace DOD
          this[ID] = outvar;
          return outvar;
       }
-      public T GetOrAdd(Key ID)
+      public T GetOrAdd(Key ID, T addval)
       {
-         var outvar = DefaultDataCtor != null ? DefaultDataCtor.Invoke() : default(T);
+         var outvar = DefaultDataCtor != null ? DefaultDataCtor.Invoke() : addval;
          this[ID] = outvar;
          return outvar;
       }
-
+      public T GetOrAdd(Key ID)
+      {
+         var outvar = DefaultDataCtor != null ? DefaultDataCtor.Invoke() : DefaultVal;
+         this[ID] = outvar;
+         return outvar;
+      }
       object IDataStream<Key>.GetOrDefault(Key ID)
       {
          if (DataSet.TryGetValue(ID, out T outval))
