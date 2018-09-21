@@ -22,7 +22,7 @@ namespace Components
       public BaseCompSys(DOD.DSManager manager) : base()
       {
          this.manager = manager;
-         this.DataStreamChanged += manager.ComponentChange;
+         this.DSChanged += manager.ComponentChange;
          //using (var container = GetConfiguration())
          //{
          //   manager = container.GetExport<DOD.DSManager>();
@@ -30,7 +30,7 @@ namespace Components
       }
       public  void Dispose()
       {
-         this.DataStreamChanged -= manager.ComponentChange;
+         this.DSChanged -= manager.ComponentChange;
          //base.Dispose();
       }
       //public static System.Composition.Hosting.CompositionHost GetConfiguration()

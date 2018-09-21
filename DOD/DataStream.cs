@@ -45,8 +45,8 @@ namespace DOD
 
       public string Name { get; }
       protected ConcurrentDictionary<Key, T> DataSet;
-      public event NotifyDataStreamChangedEventHandler<Key, T> EntityChanged;
-      public event NotifyDataStreamChangedEventHandler<Key> DataStreamChanged;
+      public event NotifyDataStreamChangedEventHandler<Key, T> DSChangedDetails;
+      public event NotifyDataStreamChangedEventHandler<Key> DSChanged;
 
       public IObservable<EntityChangedArgs<Key>> AsObservable { get; protected set; }
       public IObservable<DSChangedArgs<Key, T>> AsObservableDetails { get; protected set; }
@@ -72,8 +72,8 @@ namespace DOD
             this.Name = this.GetType().Name;
          }
 
-         this.EntityChanged += DataStream_EntityChanged;
-         this.DataStreamChanged += DataStream_DataStreamChanged;
+         this.DSChangedDetails += DataStream_EntityChanged;
+         this.DSChanged += DataStream_DataStreamChanged;
          if (comps != null)
             DataSet = new ConcurrentDictionary<Key, T>(comps);
          else
@@ -104,7 +104,7 @@ namespace DOD
 
       protected void DataStream_EntityChanged(IDataStream<Key> sender, DSChangedArgs<Key, T> args)
       {
-         DataStreamChanged.Invoke(this, args);
+         DSChanged.Invoke(this, args);
       }
 
 
@@ -133,12 +133,12 @@ namespace DOD
             if (!DataSet.ContainsKey(i))
             {
                DataSet[i] = value;
-               EntityChanged.Invoke(this, new DSChangedArgs<Key, T>(i, NotifyCollectionChangedAction.Add, default(T), value));
+               DSChangedDetails.Invoke(this, new DSChangedArgs<Key, T>(i, NotifyCollectionChangedAction.Add, default(T), value));
             }
             else if (!EqualityComparer<T>.Default.Equals(DataSet[i], value))
             {
                DataSet[i] = value;
-               EntityChanged.Invoke(this, new DSChangedArgs<Key, T>(i, NotifyCollectionChangedAction.Replace, default(T), value));
+               DSChangedDetails.Invoke(this, new DSChangedArgs<Key, T>(i, NotifyCollectionChangedAction.Replace, default(T), value));
             }
          }
       }
@@ -159,7 +159,7 @@ namespace DOD
       {
          if (DataSet.TryRemove(ID, out T val))
          {
-            EntityChanged.Invoke(this, new DSChangedArgs<Key, T>(ID, NotifyCollectionChangedAction.Remove, val, default(T)));
+            DSChangedDetails.Invoke(this, new DSChangedArgs<Key, T>(ID, NotifyCollectionChangedAction.Remove, val, default(T)));
             return true;
          }
          return false;
@@ -168,7 +168,7 @@ namespace DOD
       {
          if (DataSet.TryRemove(i, out T val))
          {
-            EntityChanged.Invoke(this, new DSChangedArgs<Key, T>(i, NotifyCollectionChangedAction.Remove, val, default(T)));
+            DSChangedDetails.Invoke(this, new DSChangedArgs<Key, T>(i, NotifyCollectionChangedAction.Remove, val, default(T)));
             return val;
          }
          return default(T);
@@ -176,7 +176,7 @@ namespace DOD
       public void Clear()
       {
          DataSet.Clear();
-         EntityChanged.Invoke(this, new DSChangedArgs<Key, T>(default(Key), NotifyCollectionChangedAction.Reset, default(T), default(T))); 
+         DSChangedDetails.Invoke(this, new DSChangedArgs<Key, T>(default(Key), NotifyCollectionChangedAction.Reset, default(T), default(T))); 
       }
 
 

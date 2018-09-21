@@ -17,7 +17,7 @@ namespace DOD
       object Get(Key ID);
       object GetOrAdd(Key ID);
       object GetOrDefault(Key ID);
-      event NotifyDataStreamChangedEventHandler<Key> DataStreamChanged;
+      event NotifyDataStreamChangedEventHandler<Key> DSChanged;
       IObservable<EntityChangedArgs<Key>> AsObservable { get; }
    }
 }

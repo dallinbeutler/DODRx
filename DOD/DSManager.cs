@@ -83,11 +83,11 @@ namespace DOD
          var myargs = args as DSChangedArgs<string, IDataStream<long>>;
          if (myargs.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
          {
-            myargs.NewVal.DataStreamChanged += ComponentChange;
+            myargs.NewVal.DSChanged += ComponentChange;
          }
          else if (args.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
          {
-            myargs.NewVal.DataStreamChanged -= ComponentChange;
+            myargs.NewVal.DSChanged -= ComponentChange;
          }
       }
 

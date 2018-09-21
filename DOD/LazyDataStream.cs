@@ -21,8 +21,8 @@ namespace DOD
          this.DefaultVal = defaultValue;
          this.Name = name?? this.GetType().Name;
 
-         this.EntityChanged += DataStream_EntityChanged;
-         this.DataStreamChanged += DataStream_DataStreamChanged;
+         this.DSChangedDetails += DataStream_EntityChanged;
+         this.DSChanged += DataStream_DataStreamChanged;
 
          AsObservable = Observable
          .FromEventPattern<EntityChangedArgs<Key>>(this, "DataStreamChanged")
