@@ -29,4 +29,19 @@ namespace Testing
 
       }
    }
+
+   public class System
+   {
+      public System(params string[] requirements)
+      {
+
+      }
+   }
+   public class Entity
+   {
+      public Entity(params System[] Requiremnets)
+      {
+
+      }
+   }
 }

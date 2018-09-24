@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using ConcurrentCollections;
 
 namespace DOD
 {
@@ -20,4 +21,11 @@ namespace DOD
       event NotifyDataStreamChangedEventHandler<Key> DSChanged;
       IObservable<EntityChangedArgs<Key>> AsObservable { get; }
    }
+
+   public enum BitFlags
+   {
+      solid = 1,
+
+   }
 }
+   
