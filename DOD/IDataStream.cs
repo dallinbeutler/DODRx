@@ -1,12 +1,13 @@
-﻿using System;
+﻿using ConcurrentCollections;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
-using ConcurrentCollections;
 
 namespace DOD
 {
-   public interface IDataStream<Key> //: Enumerable
+   public interface IDataStream<Key> : INotifyPropertyChanged //: Enumerable
    {
       bool IsInitialized { get; set; }
       string Name { get; }
@@ -19,13 +20,53 @@ namespace DOD
       object GetOrAdd(Key ID);
       object GetOrDefault(Key ID);
       event NotifyDataStreamChangedEventHandler<Key> DSChanged;
-      IObservable<EntityChangedArgs<Key>> AsObservable { get; }
+      IObservable<EntityChangedEventArgs<Key>> AsObservable { get; }
    }
 
-   public enum BitFlags
+   public class HashStream: INotifyPropertyChanged
    {
-      solid = 1,
+      ConcurrentCollections.ConcurrentHashSet<string> Data = new ConcurrentHashSet<string>();
+      public HashStream()
+      {
+         
+      }
 
+      public string Name { get; }
+
+      public int Count { get; }
+
+      public IObservable<EntityChangedEventArgs<string>> AsObservable { get; set; }
+
+      public event PropertyChangedEventHandler PropertyChanged;
+
+      public void Clear()
+      {
+         Data.Clear();
+      }
+
+      public bool Get(string ID)
+      {
+         return (Data.Contains(ID));
+
+      }
+
+      public void Set(string ID, bool IsAdding)
+      {
+         if (IsAdding)
+         {
+            if (Data.Add(ID)) PropertyChanged.Invoke(this, new HashChangedEventArgs(ID, IsAdding));
+         }
+         else
+         {
+            if (Data.TryRemove(ID)) PropertyChanged.Invoke(this, new HashChangedEventArgs(ID, IsAdding));
+         }
+      }
+   }
+   public class HashChangedEventArgs : PropertyChangedEventArgs
+   {
+      public HashChangedEventArgs(string propertyName, bool BeingSet) : base(propertyName)
+      {
+      }
    }
 }
-   
+

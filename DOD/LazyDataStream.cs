@@ -25,11 +25,11 @@ namespace DOD
          this.DSChanged += DataStream_DataStreamChanged;
 
          AsObservable = Observable
-         .FromEventPattern<EntityChangedArgs<Key>>(this, "DataStreamChanged")
+         .FromEventPattern<EntityChangedEventArgs<Key>>(this, "DataStreamChanged")
          .Select(change => change.EventArgs);
 
          AsObservableDetails = Observable
-         .FromEventPattern<DSChangedArgs<Key, T>>(this, "EntityChanged")
+         .FromEventPattern<DSChangedEventArgs<Key, T>>(this, "EntityChanged")
          .Select(change => change.EventArgs);
       }
       public void Initialize()

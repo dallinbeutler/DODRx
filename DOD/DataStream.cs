@@ -3,34 +3,36 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Linq;
 
 namespace DOD
 {
-   public delegate void NotifyDataStreamChangedEventHandler<Key>(IDataStream<Key> sender, EntityChangedArgs<Key> args);
-   public delegate void NotifyDataStreamChangedEventHandler<Key, T>(IDataStream<Key> sender, DSChangedArgs<Key, T> args);
-   public class DSChangedArgs<Key, T> : EntityChangedArgs<Key>
+   public delegate void NotifyDataStreamChangedEventHandler<Key>(IDataStream<Key> sender, EntityChangedEventArgs<Key> args);
+   public delegate void NotifyDataStreamChangedEventHandler<Key, T>(IDataStream<Key> sender, DSChangedEventArgs<Key, T> args);
+   public class DSChangedEventArgs<Key, T> : EntityChangedEventArgs<Key>
    {
       public T NewVal { get; set; }
 
       public T OldVal { get; set; }
 
-      public DSChangedArgs(Key entity, NotifyCollectionChangedAction action, T oldVal, T newVal) : base(entity, action)
+      public DSChangedEventArgs(Key entity, NotifyCollectionChangedAction action, T oldVal, T newVal) : base(entity, action)
       {
          OldVal = oldVal;
          NewVal = newVal;
       }
    }
-   public class EntityChangedArgs<Key>
+   public class EntityChangedEventArgs<Key> : PropertyChangedEventArgs
    {
       public Key Entity { get; set; }
       public NotifyCollectionChangedAction Action { get; set; }
-      public EntityChangedArgs(Key entity, NotifyCollectionChangedAction action)
+      public EntityChangedEventArgs(Key entity, NotifyCollectionChangedAction action): base(entity.ToString())
       {
          Entity = entity;
          Action = action;
       }
+           
    }
 
    /// <summary>
@@ -47,9 +49,10 @@ namespace DOD
       protected ConcurrentDictionary<Key, T> DataSet;
       public event NotifyDataStreamChangedEventHandler<Key, T> DSChangedDetails;
       public event NotifyDataStreamChangedEventHandler<Key> DSChanged;
+      public event PropertyChangedEventHandler PropertyChanged;
 
-      public IObservable<EntityChangedArgs<Key>> AsObservable { get; protected set; }
-      public IObservable<DSChangedArgs<Key, T>> AsObservableDetails { get; protected set; }
+      public IObservable<EntityChangedEventArgs<Key>> AsObservable { get; protected set; }
+      public IObservable<DSChangedEventArgs<Key, T>> AsObservableDetails { get; protected set; }
       public T DefaultVal { get; protected set; }
 
       public bool IsInitialized { get; set; } = true;
@@ -84,30 +87,30 @@ namespace DOD
          else
             DataSet = new ConcurrentDictionary<Key, T>();
          AsObservable = Observable
-         .FromEventPattern<EntityChangedArgs<Key>>(this, "DSChanged")
+         .FromEventPattern<EntityChangedEventArgs<Key>>(this, "DSChanged")
          .Select(change => change.EventArgs);
 
          AsObservableDetails = Observable
-         .FromEventPattern<DSChangedArgs<Key, T>>(this, "DSChangedDetails")
+         .FromEventPattern<DSChangedEventArgs<Key, T>>(this, "DSChangedDetails")
          .Select(change => change.EventArgs);
       }
 
 
 
-      protected void DataStream_DataStreamChanged(IDataStream<Key> sender, EntityChangedArgs<Key> args)
+      protected void DataStream_DataStreamChanged(IDataStream<Key> sender, EntityChangedEventArgs<Key> args)
       {
-         // Method intentionally left empty. We can implement events if changed
+         PropertyChanged.Invoke(this, new PropertyChangedEventArgs(args.PropertyName));
       }
 
       protected Type ChangeArgs
       {
          get
          {
-            return typeof(DSChangedArgs<Key, T>);
+            return typeof(DSChangedEventArgs<Key, T>);
          }
       }
 
-      protected void DataStream_EntityChanged(IDataStream<Key> sender, DSChangedArgs<Key, T> args)
+      protected void DataStream_EntityChanged(IDataStream<Key> sender, DSChangedEventArgs<Key, T> args)
       {
          DSChanged.Invoke(this, args);
       }
@@ -138,12 +141,12 @@ namespace DOD
             if (!DataSet.ContainsKey(i))
             {
                DataSet[i] = value;
-               DSChangedDetails.Invoke(this, new DSChangedArgs<Key, T>(i, NotifyCollectionChangedAction.Add, default(T), value));
+               DSChangedDetails.Invoke(this, new DSChangedEventArgs<Key, T>(i, NotifyCollectionChangedAction.Add, default(T), value));
             }
             else if (!EqualityComparer<T>.Default.Equals(DataSet[i], value))
             {
                DataSet[i] = value;
-               DSChangedDetails.Invoke(this, new DSChangedArgs<Key, T>(i, NotifyCollectionChangedAction.Replace, default(T), value));
+               DSChangedDetails.Invoke(this, new DSChangedEventArgs<Key, T>(i, NotifyCollectionChangedAction.Replace, default(T), value));
             }
          }
       }
@@ -164,7 +167,7 @@ namespace DOD
       {
          if (DataSet.TryRemove(ID, out T val))
          {
-            DSChangedDetails.Invoke(this, new DSChangedArgs<Key, T>(ID, NotifyCollectionChangedAction.Remove, val, default(T)));
+            DSChangedDetails.Invoke(this, new DSChangedEventArgs<Key, T>(ID, NotifyCollectionChangedAction.Remove, val, default(T)));
             return true;
          }
          return false;
@@ -173,7 +176,7 @@ namespace DOD
       {
          if (DataSet.TryRemove(i, out T val))
          {
-            DSChangedDetails.Invoke(this, new DSChangedArgs<Key, T>(i, NotifyCollectionChangedAction.Remove, val, default(T)));
+            DSChangedDetails.Invoke(this, new DSChangedEventArgs<Key, T>(i, NotifyCollectionChangedAction.Remove, val, default(T)));
             return val;
          }
          return default(T);
@@ -181,7 +184,7 @@ namespace DOD
       public void Clear()
       {
          DataSet.Clear();
-         DSChangedDetails.Invoke(this, new DSChangedArgs<Key, T>(default(Key), NotifyCollectionChangedAction.Reset, default(T), default(T))); 
+         DSChangedDetails.Invoke(this, new DSChangedEventArgs<Key, T>(default(Key), NotifyCollectionChangedAction.Reset, default(T), default(T))); 
       }
 
 

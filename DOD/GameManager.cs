@@ -10,7 +10,8 @@ namespace DOD
    {
       private long CurID;
 
-      public DataStream<string, IDataStream<long>> Data = new DataStream<string, IDataStream<long>>();
+      public DataStream<string, IDataStream<long>> Data { get; set; } = new DataStream<string, IDataStream<long>>();
+
       public IDataStream<long> this[string CompName]
       {
          get

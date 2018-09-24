@@ -26,7 +26,7 @@ namespace DOD
    {
       DataStream<long, List<IDataStream<long>>> Entities { get; }
       long AddEntity(params CompPair[] compPairs);
-      void ComponentChange(IDataStream<long> sender, EntityChangedArgs<long> args);
+      void ComponentChange(IDataStream<long> sender, EntityChangedEventArgs<long> args);
       void KillEntity(long ID);
       IEnumerable<IDataStream<long>> GetComponents(long ID);
    }
@@ -63,9 +63,9 @@ namespace DOD
          return (TT)ComponentSystems[name];
       }
 
-      private void ComponentSystems_DataStreamChanged(IDataStream<string> sender, EntityChangedArgs<string> args)
+      private void ComponentSystems_DataStreamChanged(IDataStream<string> sender, EntityChangedEventArgs<string> args)
       {
-         var myargs = args as DSChangedArgs<string, IDataStream<long>>;
+         var myargs = args as DSChangedEventArgs<string, IDataStream<long>>;
          if (myargs.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
          {
             myargs.NewVal.DSChanged += ComponentChange;
@@ -76,7 +76,7 @@ namespace DOD
          }
       }
 
-      public void ComponentChange(IDataStream<long> sender, EntityChangedArgs<long> args)
+      public void ComponentChange(IDataStream<long> sender, EntityChangedEventArgs<long> args)
       {
          if (args.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
          {
