@@ -17,7 +17,6 @@ namespace RxDOD
       {
          Program p = new Program();
          var f = p.data.Lookup("foo");
-         f.Value;
          Console.WriteLine("Hello World!");
       }
    }

@@ -1,6 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
+using MonoGame.Extended.Graphics;
+using MonoGame.Extended.ViewportAdapters;
+using System.Reactive;
+using System.Reactive.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reactive.Subjects;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace GodRust
 {
@@ -11,11 +22,14 @@ namespace GodRust
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+        Camera2D Camera;
+      InputHandler InputHandler;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            
         }
 
         /// <summary>
@@ -29,7 +43,11 @@ namespace GodRust
             // TODO: Add your initialization logic here
 
             base.Initialize();
-        }
+         var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 800, 480);
+         Camera = new Camera2D(viewportAdapter);
+         InputHandler = new InputHandler();
+        
+      }
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -61,9 +79,9 @@ namespace GodRust
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            
-            // TODO: Add your update logic here
-
+         InputHandler.Update(gameTime);
+         // TODO: Add your update logic here
+         //Camera.Position = new Vector2(Camera.Position.X-.01f);
             base.Update(gameTime);
         }
 
@@ -77,7 +95,12 @@ namespace GodRust
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
-            //GraphicsDevice.DrawPrimitives(PrimitiveType.)
+         //GraphicsDevice.DrawPrimitives(PrimitiveType.)
+
+         spriteBatch.Begin(transformMatrix: Camera.GetViewMatrix());
+         spriteBatch.DrawRectangle(new Rectangle(0, 0, 100, 100), Color.Black);
+         
+         spriteBatch.End();
         }
     }
 }

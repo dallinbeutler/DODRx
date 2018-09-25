@@ -64,7 +64,7 @@ namespace Testing
          long dave = manager.AddEntity(new CompPair(hc, new HealthComp()));
          hc.Bleed(dougy,15,4);
          nc[dave] = "DAVVVE";
-         System.Threading.Thread.Sleep(5000);
+         Thread.Sleep(5000);
          var TimeManager = manager.GetCompSys<SysTime>();
          long Rick = manager.AddEntity(new CompPair(hc, 100),new CompPair(nc,"RICK"));
          TimeManager.Room.Dilation = 1.0;

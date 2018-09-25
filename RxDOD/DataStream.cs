@@ -8,9 +8,9 @@ namespace RxDOD
 {
    class DataStream<T> : SourceCache<KeyValuePair<long, T>, long>
    {
-      public DataStream(Func<KeyValuePair<long, T>, long> keySelector) : base(keySelector)
+      public DataStream() : base( x=>x.Key)
       {
-         keySelector
+         
       }
    }
 
