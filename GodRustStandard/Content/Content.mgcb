@@ -1,0 +1,24 @@
+
+#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:Windows
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+/reference:..\..\packages\MonoGame.Extended.Content.Pipeline.1.1.0\tools\MonoGame.Extended.Content.Pipeline.dll
+/reference:..\..\packages\MonoGame.Extended.Tiled.1.1.0\lib\portable-net45+win8+wpa81\MonoGame.Extended.Tiled.dll
+
+#---------------------------------- Content ---------------------------------#
+
+#begin BasicFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:BasicFont.spritefont
+
