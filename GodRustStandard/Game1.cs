@@ -28,10 +28,10 @@ namespace GodRustShared
       //      Camera2D Camera;
       //      InputHandler InputHandler;
       SpriteFont Font;
-      public Game1()
-      {
+      public Game1(): base()
+      { 
          //graphics = new GraphicsDeviceManager(this);
-         Content.RootDirectory = "Content";
+         //Content.RootDirectory = "../../Content";
 
          //graphics.IsFullScreen = true;
       }
@@ -47,40 +47,50 @@ namespace GodRustShared
       //      /// 
       //      float vx = 0f;
       //      float vy = 0f;
-      //      protected override void Initialize()
-      //      {
-      //         // TODO: Add your initialization logic here
-      //         base.Initialize();
-      //         var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 800, 480);
+      protected override void Initialize()
+      {
+         base.Initialize();
+         Core.debugRenderEnabled = true;
+         //         // TODO: Add your initialization logic here
+         var s = Scene.createWithDefaultRenderer(Color.CornflowerBlue);
+         var first = s.createEntity("first entity",new Vector2(100,100));
+         
+         var c = first.addComponent(new CircleCollider(10));
+         
+         scene = s;
+        
 
-      //         Camera = new Camera2D(viewportAdapter);
-      //         InputHandler = new InputHandler();
-      //         var obs = InputHandler.ButtonStates.AsObservableDetails;
-      //         obs.Subscribe(x =>
-      //         {
+         //         var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 800, 480);
 
-      //         switch (x.Entity)
-      //            {
-      //               case Buttons.LeftThumbstickLeft:
-      //                  vx -= 1;
-      //                  break;
-      //               case Buttons.LeftThumbstickRight:
-      //                  vx += 1;
-      //                  break;
-      //               case Buttons.LeftThumbstickUp:
-      //                  vy -= 1;
-      //                  break;
-      //               case Buttons.LeftThumbstickDown:
-      //                  vy += 1;
-      //                  break;
-      //            }
-      //            var move = new Vector2(vx, vy);
-      //            //Camera.Move(move);
-      //            Window.Title = move.ToString();
-      //            //Camera.Move(new Vector2(vx, vy));
-      //         });
+         //         Camera = new Camera2D(viewportAdapter);
+         //         InputHandler = new InputHandler();
+         //         var obs = InputHandler.ButtonStates.AsObservableDetails;
+         //         obs.Subscribe(x =>
+         //         {
 
-      //      }
+         //         switch (x.Entity)
+         //            {
+         //               case Buttons.LeftThumbstickLeft:
+         //                  vx -= 1;
+         //                  break;
+         //               case Buttons.LeftThumbstickRight:
+         //                  vx += 1;
+         //                  break;
+         //               case Buttons.LeftThumbstickUp:
+         //                  vy -= 1;
+         //                  break;
+         //               case Buttons.LeftThumbstickDown:
+         //                  vy += 1;
+         //                  break;
+         //            }
+         //            var move = new Vector2(vx, vy);
+         //            //Camera.Move(move);
+         //            Window.Title = move.ToString();
+         //            //Camera.Move(new Vector2(vx, vy));
+         //         });
+
+      }
+
 
       //      /// <summary>
       //      /// LoadContent will be called once per game and is the place to load
@@ -92,6 +102,7 @@ namespace GodRustShared
          //spriteBatch = new SpriteBatch(GraphicsDevice);
          Font = Content.Load<SpriteFont>("FontArial");
          //TODO: use this.Content to load your game content here 
+
       }
 
       //      /// <summary>
@@ -140,5 +151,12 @@ namespace GodRustShared
       //         spriteBatch.DrawString(Font, "FUCK", new Vector2(), Color.Black);
       //         spriteBatch.End();
       //      }
+
+
+      protected override void Draw(GameTime gameTime)
+      {
+         base.Draw(gameTime);
+         //this.
+      }
    }
 }
