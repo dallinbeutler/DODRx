@@ -14,6 +14,7 @@ using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
 using Nez;
+using GodRustStandard;
 #endregion
 
 namespace GodRustShared
@@ -56,8 +57,16 @@ namespace GodRustShared
          var first = s.createEntity("first entity",new Vector2(100,100));
          
          var c = first.addComponent(new CircleCollider(10));
+         s.camera.entity = first;
          
-         scene = s;
+         Observable.Interval(new TimeSpan(0, 0, 0, 0, 200)).Subscribe(x=> 
+         {
+            first.position += new Vector2(8, 8);
+         });
+
+
+         //scene = s;
+         scene = TestingScenes.TestingScene01();
         
 
          //         var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 800, 480);
