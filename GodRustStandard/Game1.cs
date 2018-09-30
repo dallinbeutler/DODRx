@@ -1,36 +1,66 @@
 ﻿#region Using Statements
+using GodRustStandard;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Nez;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 //using MonoGame.Extended;
 //using MonoGame.Extended.Graphics;
 //using MonoGame.Extended.ViewportAdapters;
 using System.Reactive;
 using System.Reactive.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reactive.Subjects;
 using System.Text;
 using System.Threading.Tasks;
-using Nez;
-using GodRustStandard;
 #endregion
 
-namespace GodRustShared
+namespace GodRustStandard
 {
+
+   public enum LoopState
+   {
+      Initialize,
+      UpdateBegin,
+      Update,
+      UpdateEnd,
+      Load,
+      Unload,
+      Draw
+   }
    /// <summary>
    /// This is the main type for your game.
    /// </summary>
+   public delegate void LoopArgsEventHandler(object sender, LoopArgs loopArgs);
+   public struct LoopArgs
+   {
+      public LoopState LoopState { get; set; }
+      public GameTime GameTime { get; set; }
+      public LoopArgs(LoopState ls, GameTime gt)
+      {
+         this.LoopState = ls;
+         GameTime = gt;
+      }
+   }
+
    public class Game1 : Core
    {
       //      GraphicsDeviceManager graphics;
       //      SpriteBatch spriteBatch;
       //      Camera2D Camera;
       //      InputHandler InputHandler;
+
+
       SpriteFont Font;
-      public Game1(): base()
-      { 
+
+      public event LoopArgsEventHandler StateChange = (x, y) => { };
+      public IObservable<LoopArgs> AsObservable => Observable.FromEventPattern<LoopArgs>(this, "StateChange").Select(x => x.EventArgs);
+
+      public Game1() : base()
+      {
+
          //graphics = new GraphicsDeviceManager(this);
          //Content.RootDirectory = "../../Content";
 
@@ -54,49 +84,20 @@ namespace GodRustShared
          Core.debugRenderEnabled = true;
          //         // TODO: Add your initialization logic here
          var s = Scene.createWithDefaultRenderer(Color.CornflowerBlue);
-         var first = s.createEntity("first entity",new Vector2(100,100));
-         
+         var first = s.createEntity("first entity", new Vector2(100, 100));
+
          var c = first.addComponent(new CircleCollider(10));
          s.camera.entity = first;
-         
-         Observable.Interval(new TimeSpan(0, 0, 0, 0, 200)).Subscribe(x=> 
+
+         Observable.Interval(new TimeSpan(0, 0, 0, 0, 200)).Subscribe(x =>
          {
             first.position += new Vector2(8, 8);
          });
 
-
          //scene = s;
          scene = TestingScenes.TestingScene01();
-        
 
-         //         var viewportAdapter = new BoxingViewportAdapter(Window, GraphicsDevice, 800, 480);
-
-         //         Camera = new Camera2D(viewportAdapter);
-         //         InputHandler = new InputHandler();
-         //         var obs = InputHandler.ButtonStates.AsObservableDetails;
-         //         obs.Subscribe(x =>
-         //         {
-
-         //         switch (x.Entity)
-         //            {
-         //               case Buttons.LeftThumbstickLeft:
-         //                  vx -= 1;
-         //                  break;
-         //               case Buttons.LeftThumbstickRight:
-         //                  vx += 1;
-         //                  break;
-         //               case Buttons.LeftThumbstickUp:
-         //                  vy -= 1;
-         //                  break;
-         //               case Buttons.LeftThumbstickDown:
-         //                  vy += 1;
-         //                  break;
-         //            }
-         //            var move = new Vector2(vx, vy);
-         //            //Camera.Move(move);
-         //            Window.Title = move.ToString();
-         //            //Camera.Move(new Vector2(vx, vy));
-         //         });
+         StateChange.Invoke(this, new LoopArgs(LoopState.Initialize, null));
 
       }
 
@@ -111,61 +112,45 @@ namespace GodRustShared
          //spriteBatch = new SpriteBatch(GraphicsDevice);
          Font = Content.Load<SpriteFont>("FontArial");
          //TODO: use this.Content to load your game content here 
-
+         StateChange.Invoke(this, new LoopArgs(LoopState.Load, null));
       }
 
-      //      /// <summary>
-      //      /// Allows the game to run logic such as updating the world,
-      //      /// checking for collisions, gathering input, and playing audio.
-      //      /// </summary>
-      //      /// <param name="gameTime">Provides a snapshot of timing values.</param>
-      //      protected override void Update(GameTime gameTime)
-      //      {
-      //         // For Mobile devices, this logic will close the Game when the Back button is pressed
-      //         // Exit() is obsolete on iOS
-      //#if !__IOS__ && !__TVOS__
-      //         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-      //             Keyboard.GetState().IsKeyDown(Keys.Escape))
-      //         {
-      //            Exit();
-      //         }
-      //#endif
-      //         InputHandler.Update(gameTime);
+      /// <summary>
+      /// Allows the game to run logic such as updating the world,
+      /// checking for collisions, gathering input, and playing audio.
+      /// </summary>
+      /// <param name="gameTime">Provides a snapshot of timing values.</param>
+      protected override void Update(GameTime gameTime)
+      {
+         base.Update(gameTime);
+         // For Mobile devices, this logic will close the Game when the Back button is pressed
+         // Exit() is obsolete on iOS
+#if !__IOS__ && !__TVOS__
+         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
+             Keyboard.GetState().IsKeyDown(Keys.Escape))
+         {
+            Exit();
+         }
+#endif
+         // TODO: Add your update logic here			
+         StateChange.Invoke(this, new LoopArgs(LoopState.UpdateBegin, gameTime));
+         StateChange.Invoke(this, new LoopArgs(LoopState.Update, gameTime));
+         StateChange.Invoke(this, new LoopArgs(LoopState.UpdateEnd, gameTime));
+      }
 
-      //         // TODO: Add your update logic here			
-      //         base.Update(gameTime);
-      //      }
-
-      //      /// <summary>
-      //      /// This is called when the game should draw itself.
-      //      /// </summary>
-      //      /// <param name="gameTime">Provides a snapshot of timing values.</param>
-      //      protected override void Draw(GameTime gameTime)
-      //      {
-      //         GraphicsDevice.Clear(Color.CornflowerBlue);
-
-      //         //TODO: Add your drawing code here
-
-      //         base.Draw(gameTime);
-
-
-      //         GraphicsDevice.Clear(Color.CornflowerBlue);
-      //         // TODO: Add your drawing code here
-
-      //         base.Draw(gameTime);
-      //         //GraphicsDevice.DrawPrimitives(PrimitiveType.)
-
-      //         spriteBatch.Begin(transformMatrix: Camera.GetViewMatrix());
-      //         spriteBatch.DrawRectangle(new Rectangle((int)vx, (int)vy, 100, 100), Color.Black);
-      //         spriteBatch.DrawString(Font, "FUCK", new Vector2(), Color.Black);
-      //         spriteBatch.End();
-      //      }
+      protected override void UnloadContent()
+      {
+         base.UnloadContent();
+         StateChange.Invoke(this, new LoopArgs(LoopState.Unload, null));
+      }
 
 
       protected override void Draw(GameTime gameTime)
       {
          base.Draw(gameTime);
-         //this.
+         StateChange.Invoke(this, new LoopArgs(LoopState.Draw, gameTime));
       }
+
+
    }
 }

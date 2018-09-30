@@ -12,7 +12,7 @@ namespace GodRustStandard
    {
       public static Scene TestingScene01()
       {
-         Scene scene = Scene.createWithDefaultRenderer(Color.CornflowerBlue);
+         Scene scene = Scene.createWithDefaultRenderer(Microsoft.Xna.Framework.Color.CornflowerBlue);
 
          Entity Player = new Entity("Player");
          var c = Player.addComponent<BoxCollider>();

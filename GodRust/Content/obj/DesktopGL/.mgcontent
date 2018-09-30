@@ -4,9 +4,6 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Dallin/Source/Repos/DODRx/GodRust/Content/FontArial.spritefont</File>
+    <File>C:/Users/User/Documents/Repos/DODRx/GodRust/Content/FontArial.spritefont</File>
   </SourceFiles>
-  <DestFiles>
-    <File xsi:nil="true" />
-  </DestFiles>
 </SourceFileCollection>

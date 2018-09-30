@@ -1,47 +1,52 @@
-﻿//using Microsoft.Xna.Framework;
-//using Microsoft.Xna.Framework.Input;
-//using MonoGame.Extended.Input;
-//using MonoGame.Extended.Input.InputListeners;
-//using System;
-//using System.Collections.Generic;
-//using System.Collections.Concurrent;
-//using System.Collections.Specialized;
-//using System.Reactive.Linq;
-//using System.Collections.ObjectModel;
-//using DOD;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.Input;
+using MonoGame.Extended.Input.InputListeners;
+using System;
+using System.Collections.Generic;
+using System.Collections.Concurrent;
+using System.Collections.Specialized;
+using System.Reactive.Linq;
+using System.Collections.ObjectModel;
+using DOD;
+using Nez;
 
-//namespace GodRustShared
-//{
-//   public class InputHandler
-//   {
-//      public DataStream<Buttons, bool> ButtonStates = new DataStream<Buttons, bool>() ;
-//      public InputHandler()
-//      {
-//         gplistener = new GamePadListener();
-//         gplistener.ButtonDown += Gplistener_ButtonDown;
-//         gplistener.ButtonUp += Gplistener_ButtonUp;
+namespace GodRustStandard
+{
+   public class InputHandler : IUpdatable
+   {
+      public DataStream<Buttons, bool> ButtonStates = new DataStream<Buttons, bool>();
+      public Vector2 LeftStick = new Vector2();
+      public Vector2 RightStick = new Vector2();
+      public InputHandler()
+      {
 
-//         ButtonStates[Buttons.LeftThumbstickLeft] = false;
-//         ButtonStates[Buttons.LeftThumbstickRight] = false;
-//         ButtonStates[Buttons.LeftThumbstickUp] = false;
-//         ButtonStates[Buttons.LeftThumbstickDown] = false;
+         
+         ButtonStates[Buttons.LeftThumbstickLeft] = false;
+         ButtonStates[Buttons.LeftThumbstickRight] = false;
+         ButtonStates[Buttons.LeftThumbstickUp] = false;
+         ButtonStates[Buttons.LeftThumbstickDown] = false;
+         ButtonStates[Buttons.A] = false;
+         ButtonStates[Buttons.B] = false;
+         ButtonStates[Buttons.X] = false;
+         ButtonStates[Buttons.Y] = false;
+         ButtonStates[Buttons.LeftTrigger] = false;
+         ButtonStates[Buttons.RightTrigger] = false;
+         ButtonStates[Buttons.Start] = false;
 
-//      }
+         //var p = new GamePadState()
 
-//      private void Gplistener_ButtonUp(object sender, GamePadEventArgs e)
-//      {
-//         ButtonStates[e.Button] = false;
-//      }
+      }
 
-//      private void Gplistener_ButtonDown(object sender, GamePadEventArgs e)
-//      {
-//         ButtonStates[e.Button] = true;
-//      }
-//      GamePadListener gplistener { get; set; }
-//      public void Update(GameTime gameTime)
-//      {
-//         gplistener.Update(gameTime);
-//      }
-      
-//   }
-//}
+      public bool enabled => true;
+
+      public int updateOrder => 0;
+
+      public  virtual void update()
+      {
+         
+      }
+               
+
+   }
+}

@@ -5,11 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Monogame.Extended.Input" Version="1.1.0" />
     <PackageReference Include="MonoGame.Framework.Portable" Version="3.7.0.1708" />
     <PackageReference Include="System.Reactive" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DOD\DOD.csproj" />
     <ProjectReference Include="..\Nez\Nez.Portable\Nez.csproj" />
   </ItemGroup>
 
