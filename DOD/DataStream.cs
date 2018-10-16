@@ -49,7 +49,7 @@ namespace DOD
       protected ConcurrentDictionary<Key, T> DataSet;
       public event NotifyDataStreamChangedEventHandler<Key, T> DSChangedDetails;
       public event NotifyDataStreamChangedEventHandler<Key> DSChanged;
-      public event PropertyChangedEventHandler PropertyChanged;
+      public event PropertyChangedEventHandler PropertyChanged = (x,y)=>{ };
 
       public IObservable<EntityChangedEventArgs<Key>> AsObservable { get; protected set; }
       public IObservable<DSChangedEventArgs<Key, T>> AsObservableDetails { get; protected set; }

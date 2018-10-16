@@ -43,12 +43,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Game1.cs" />
-    <Compile Include="InputHandler.cs" />
-    <Compile Include="Primitives2D.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reactive.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Extended, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -60,6 +56,9 @@
     <Reference Include="MonoGame.Extended.Input, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MonoGame.Extended.Input.1.1.0\lib\portable-net45+win8+wpa81\MonoGame.Extended.Input.dll</HintPath>
     </Reference>
+    <Reference Include="MonoGame.Extended.Tiled, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Extended.Tiled.1.1.0\lib\portable-net45+win8+wpa81\MonoGame.Extended.Tiled.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
     </Reference>
@@ -70,22 +69,22 @@
       <HintPath>..\packages\ParallelExtensionsExtras.1.2.0.0\lib\net40\ParallelExtensionsExtras.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Reactive.Core, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reactive.Core.3.1.1\lib\net45\System.Reactive.Core.dll</HintPath>
+    <Reference Include="System.Reactive, Version=4.1.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.4.1.0\lib\net46\System.Reactive.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Interfaces, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reactive.Interfaces.3.1.1\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.Linq, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reactive.Linq.3.1.1\lib\net45\System.Reactive.Linq.dll</HintPath>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="System.Reactive.PlatformServices, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reactive.PlatformServices.3.1.1\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Reactive.Windows.Threading, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Reactive.Windows.Threading.3.1.1\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -141,12 +140,134 @@
     </None>
     <None Include="app.config" />
     <None Include="app.manifest" />
+    <None Include="Content\DefaultContent\effects\Bevels.mgfxo" />
+    <None Include="Content\DefaultContent\effects\BloomCombine.mgfxo" />
+    <None Include="Content\DefaultContent\effects\BloomExtract.mgfxo" />
+    <None Include="Content\DefaultContent\effects\Crosshatch.mgfxo" />
+    <None Include="Content\DefaultContent\effects\DeferredLighting.mgfxo" />
+    <None Include="Content\DefaultContent\effects\DeferredSprite.mgfxo" />
+    <None Include="Content\DefaultContent\effects\Dissolve.mgfxo" />
+    <None Include="Content\DefaultContent\effects\Dots.mgfxo" />
+    <None Include="Content\DefaultContent\effects\ForwardLighting.mgfxo" />
+    <None Include="Content\DefaultContent\effects\GaussianBlur.mgfxo" />
+    <None Include="Content\DefaultContent\effects\Grayscale.mgfxo" />
+    <None Include="Content\DefaultContent\effects\HeatDistortion.mgfxo" />
+    <None Include="Content\DefaultContent\effects\Invert.mgfxo" />
+    <None Include="Content\DefaultContent\effects\Letterbox.mgfxo" />
+    <None Include="Content\DefaultContent\effects\MultiTexture.mgfxo" />
+    <None Include="Content\DefaultContent\effects\MultiTextureOverlay.mgfxo" />
+    <None Include="Content\DefaultContent\effects\Noise.mgfxo" />
+    <None Include="Content\DefaultContent\effects\PaletteCycler.mgfxo" />
+    <None Include="Content\DefaultContent\effects\PixelGlitch.mgfxo" />
+    <None Include="Content\DefaultContent\effects\PolygonLight.mgfxo" />
+    <None Include="Content\DefaultContent\effects\Reflection.mgfxo" />
+    <None Include="Content\DefaultContent\effects\Scanlines.mgfxo" />
+    <None Include="Content\DefaultContent\effects\Sepia.mgfxo" />
+    <None Include="Content\DefaultContent\effects\SpriteAlphaTest.mgfxo" />
+    <None Include="Content\DefaultContent\effects\SpriteBlinkEffect.mgfxo" />
+    <None Include="Content\DefaultContent\effects\SpriteEffect.mgfxo" />
+    <None Include="Content\DefaultContent\effects\SpriteLightMultiply.mgfxo" />
+    <None Include="Content\DefaultContent\effects\SpriteLines.mgfxo" />
+    <None Include="Content\DefaultContent\effects\transitions\Squares.mgfxo" />
+    <None Include="Content\DefaultContent\effects\transitions\TextureWipe.mgfxo" />
+    <None Include="Content\DefaultContent\effects\transitions\Wind.mgfxo" />
+    <None Include="Content\DefaultContent\effects\Twist.mgfxo" />
+    <None Include="Content\DefaultContent\effects\Vignette.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\Bevels.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\BloomCombine.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\BloomExtract.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\Crosshatch.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\DeferredLighting.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\DeferredSprite.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\Dissolve.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\Dots.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\ForwardLighting.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\GaussianBlur.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\Grayscale.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\HeatDistortion.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\Invert.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\Letterbox.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\MultiTexture.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\MultiTextureOverlay.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\Noise.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\PaletteCycler.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\PixelGlitch.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\PolygonLight.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\Reflection.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\Scanlines.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\Sepia.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\SpriteAlphaTest.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\SpriteBlinkEffect.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\SpriteEffect.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\SpriteLightMultiply.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\SpriteLines.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\transitions\Squares.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\transitions\TextureWipe.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\transitions\Wind.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\Twist.mgfxo" />
+    <None Include="Content\DefaultContent\effects_MonoGame_3.5\Vignette.mgfxo" />
+    <None Include="Content\DefaultContent\FNAEffects\Bevels.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\BloomCombine.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\BloomExtract.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\Crosshatch.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\DeferredLighting.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\DeferredSprite.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\Dissolve.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\Dots.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\ForwardLighting.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\GaussianBlur.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\Grayscale.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\HeatDistortion.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\Invert.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\Letterbox.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\MultiTexture.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\MultiTextureOverlay.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\Noise.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\PaletteCycler.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\PixelGlitch.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\PolygonLight.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\Reflection.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\Scanlines.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\Sepia.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\SpriteAlphaTest.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\SpriteBlinkEffect.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\SpriteEffect.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\SpriteLightMultiply.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\SpriteLines.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\Squares.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\TextureWipe.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\transitions\Squares.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\transitions\TextureWipe.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\transitions\Wind.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\Twist.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\Vignette.fxb" />
+    <None Include="Content\DefaultContent\FNAEffects\Wind.fxb" />
+    <None Include="Content\DefaultContent\NezDefaultBMFont.xnb" />
+    <None Include="Content\DefaultContent\textures\gooCursor.xnb" />
+    <None Include="Content\DefaultContent\textures\heatDistortionNoise.xnb" />
+    <None Include="Content\DefaultContent\textures\textureWipeTransition\angular.xnb" />
+    <None Include="Content\DefaultContent\textures\textureWipeTransition\crissCross.xnb" />
+    <None Include="Content\DefaultContent\textures\textureWipeTransition\diagonalDistort.xnb" />
+    <None Include="Content\DefaultContent\textures\textureWipeTransition\horizontal.xnb" />
+    <None Include="Content\DefaultContent\textures\textureWipeTransition\noise.xnb" />
+    <None Include="Content\DefaultContent\textures\textureWipeTransition\pokemon.xnb" />
+    <None Include="Content\DefaultContent\textures\textureWipeTransition\sawTooth.xnb" />
+    <None Include="Content\DefaultContent\textures\textureWipeTransition\spiral.xnb" />
+    <None Include="Content\DefaultContent\textures\textureWipeTransition\wink.xnb" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DOD\DOD.csproj">
       <Project>{6e464778-d5e6-402f-ab22-6923f3c7214c}</Project>
       <Name>DOD</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GodRustStandard\GodRustStandard.csproj">
+      <Project>{37e96fdb-5458-4119-b2f9-18506cb9d49c}</Project>
+      <Name>GodRustStandard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Nez\Nez.Portable\Nez.csproj">
+      <Project>{60b7197d-d0d5-405c-90a2-a56903e9b039}</Project>
+      <Name>Nez</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

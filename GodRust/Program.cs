@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GodRustShared;
+using System;
 
 namespace GodRust
 {

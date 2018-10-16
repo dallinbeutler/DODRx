@@ -10,6 +10,14 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\..\Nez\Nez.PipelineImporter\bin\Debug\Nez.PipelineImporter.dll
 
 #---------------------------------- Content ---------------------------------#
+
+#begin FontArial.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:FontArial.spritefont
 
