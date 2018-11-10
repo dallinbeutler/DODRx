@@ -9,6 +9,7 @@
     <PackageReference Include="DynamicData" Version="6.5.1.2479" />
     <PackageReference Include="Microsoft.VisualStudio.Composition" Version="15.8.98" />
     <PackageReference Include="ReactiveUI" Version="9.0.1" />
+    <PackageReference Include="TheCollective.NetCore" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

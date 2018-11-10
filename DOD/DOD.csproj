@@ -10,4 +10,8 @@
     <PackageReference Include="System.Reactive.Linq" Version="4.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DODFS\DODFS.fsproj" />
+  </ItemGroup>
+
 </Project>
