@@ -20,8 +20,6 @@ namespace GodRustStandard
       public Vector2 RightStick = new Vector2();
       public InputHandler()
       {
-
-         
          ButtonStates[Buttons.LeftThumbstickLeft] = false;
          ButtonStates[Buttons.LeftThumbstickRight] = false;
          ButtonStates[Buttons.LeftThumbstickUp] = false;
@@ -44,9 +42,8 @@ namespace GodRustStandard
 
       public  virtual void update()
       {
-         
+
       }
-               
 
    }
 }
